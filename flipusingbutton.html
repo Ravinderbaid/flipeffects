@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+<style>
+.container {
+    position: absolute;   
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+}
+
+.page1 {
+    width: 300px;
+    height: 300px;
+    background: red;
+    position: relative;
+}
+
+.page2 {
+    width: 300px;
+    height: 300px;
+    background: blue;
+    position: relative;
+    display: none;
+}
+
+.flip {
+    -webkit-backface-visibility:hidden;
+    -webkit-transform:translateX(0); 
+    -moz-backface-visibility:hidden;
+    -moz-transform:translateX(0);
+}
+.flip.out {
+    -webkit-transform: rotateY(-90deg) scale(.9);
+    -webkit-animation-name: flipouttoleft;
+    -webkit-animation-duration: 175ms;
+    -moz-transform: rotateY(-90deg) scale(.9);
+    -moz-animation-name: flipouttoleft;
+    -moz-animation-duration: 175ms;
+}
+.flip.in {
+    -webkit-animation-name: flipintoright;
+    -webkit-animation-duration: 225ms;
+    -moz-animation-name: flipintoright;
+    -moz-animation-duration: 225ms;
+}
+.flip.out.reverse {
+    -webkit-transform: rotateY(90deg) scale(.9);
+    -webkit-animation-name: flipouttoright;
+    -moz-transform: rotateY(90deg) scale(.9);
+    -moz-animation-name: flipouttoright;
+}
+.flip.in.reverse {
+    -webkit-animation-name: flipintoleft;
+    -moz-animation-name: flipintoleft;
+}
+@-webkit-keyframes flipouttoleft {
+    from { -webkit-transform: rotateY(0); }
+    to { -webkit-transform: rotateY(-90deg) scale(.9); }
+}
+@-moz-keyframes flipouttoleft {
+    from { -moz-transform: rotateY(0); }
+    to { -moz-transform: rotateY(-90deg) scale(.9); }
+}
+@-webkit-keyframes flipouttoright {
+    from { -webkit-transform: rotateY(0) ; }
+    to { -webkit-transform: rotateY(90deg) scale(.9); }
+}
+@-moz-keyframes flipouttoright {
+    from { -moz-transform: rotateY(0); }
+    to { -moz-transform: rotateY(90deg) scale(.9); }
+}
+@-webkit-keyframes flipintoleft {
+    from { -webkit-transform: rotateY(-90deg) scale(.9); }
+    to { -webkit-transform: rotateY(0); }
+}
+@-moz-keyframes flipintoleft {
+    from { -moz-transform: rotateY(-90deg) scale(.9); }
+    to { -moz-transform: rotateY(0); }
+}
+@-webkit-keyframes flipintoright {
+    from { -webkit-transform: rotateY(90deg) scale(.9); }
+    to { -webkit-transform: rotateY(0); }
+}
+@-moz-keyframes flipintoright {
+    from { -moz-transform: rotateY(90deg) scale(.9); }
+    to { -moz-transform: rotateY(0); }
+}
+</style>
+</head>
+<body>
+    <h1> Flip using buttons</h1>
+<button type="button" id="go">FLIP</button>
+<div class="container">
+    <div class="page1">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod mauris metus, ac consectetur felis. Cras consectetur, est vel malesuada faucibus, ligula enim suscipit elit, ut ornare quam urna quis felis. In hac habitasse platea dictumst.
+    </div>
+    <div class="page2">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis interdum, odio vel condimentum varius, nibh nunc ultrices velit, vestibulum consequat arcu libero eget nibh. Integer sed nibh velit.
+    </div>
+</div>
+<script src = "jquery.js"></script>
+<script type="text/javascript">
+$('#go').click(function() {
+    var page1 = $('.page1');
+    var page2 = $('.page2');
+    var toHide = page1.is(':visible') ? page1 : page2;
+    var toShow = page2.is(':visible') ? page1 : page2;
+    
+    toHide.removeClass('flip in').addClass('flip out').hide();
+    toShow.removeClass('flip out').addClass('flip in').show();
+});
+</script>
+</body>
+</html>
